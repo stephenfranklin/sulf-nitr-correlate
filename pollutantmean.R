@@ -25,16 +25,18 @@
 #   }
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-    x <- vector(mode="numeric", length=0)  # make an empty vector
-    for(i in id){
-        file = paste(directory,"/",sprintf("%03.f", as.numeric(i)),".csv", sep="")
-        X<-read.csv(file)
-        rbind(x,X[,pollutant])
+    setwd(paste("./",directory, sep=""))
+    filenames <- paste(sprintf("%03.f", as.numeric(id)),".csv", sep="")
+    X <- read.csv(filenames[1])  # make an empty vector
+    for(i in filenames[-1]){
+        cat(i)
+        # = paste(directory,"/",sprintf("%03.f", as.numeric(i)),".csv", sep="")
+        Y<-read.csv(i)
+        #X<-rbind(X,Y[,pollutant])
+        X<-rbind(X,Y)
     # now we have a vector containing the values of
     # the chosen pollutant in all the specfied files.
     }
-    themean<-mean(x,na.rm=T)
-    return(themean)
-    
-    
-    
+    themean<-round(mean(X[,pollutant],na.rm=T),3)
+    return(x)
+}
