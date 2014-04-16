@@ -5,7 +5,8 @@ Calculates the correlation between sulfate and nitrate pollution in the atmosphe
 
 ## Part 1
 Write a function named 'pollutantmean' that calculates the mean of a pollutant (sulfate or nitrate) across a specified list of monitors. The function 'pollutantmean' takes three arguments: 'directory', 'pollutant', and 'id'. Given a vector monitor ID numbers, 'pollutantmean' reads that monitors' particulate matter data from the directory specified in the 'directory' argument and returns the mean of the pollutant across all of the monitors, ignoring any missing values coded as NA. A prototype of the function is as follows
-    pollutantmean <- function(directory, pollutant, id = 1:332) {
+```
+   pollutantmean <- function(directory, pollutant, id = 1:332) {
         ## 'directory' is a character vector of length 1 indicating
         ## the location of the CSV files
 
@@ -18,12 +19,14 @@ Write a function named 'pollutantmean' that calculates the mean of a pollutant (
 
         ## Return the mean of the pollutant across all monitors list
         ## in the 'id' vector (ignoring NA values)
-    }
+   }
+```
 You can see some example output from this function. The function that you write should be able to match this output. Please save your code to a file named **pollutantmean.R**.
 
 ## Part 2
 Write a function that reads a directory full of files and reports the number of completely observed cases in each data file. The function should return a data frame where the first column is the name of the file and the second column is the number of complete cases. A prototype of this function follows
-    complete <- function(directory, id = 1:332) {
+```
+complete <- function(directory, id = 1:332) {
         ## 'directory' is a character vector of length 1 indicating
         ## the location of the CSV files
 
@@ -37,7 +40,8 @@ Write a function that reads a directory full of files and reports the number of 
         ## ...
         ## where 'id' is the monitor ID number and 'nobs' is the
         ## number of complete cases
-    }
+}
+```
 You can see some example output from this function. The function that you write should be able to match this output. Please save your code to a file named **complete.R**. To run the submit script for this part, make sure your working directory has the file complete.R in it.
 
 ## Part 3
