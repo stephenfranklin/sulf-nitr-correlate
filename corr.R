@@ -20,10 +20,25 @@
 #     ## Return a numeric vector of correlations
 # }
 corr <- function(directory, threshold = 0) {
+    source("complete.R") # number of complete cases
     completes <- complete(directory=directory, id=1:10)
+        # of all files there.
     #cat(sprintf("c.nrow: %i\n", nrow(completes)))
-    desired.completes <- subset(completes, completes$nobs>threshold)
+    selects <- subset(completes, completes$nobs>threshold)
+        # select just the ones with enough complete cases.
     #cat(sprintf("dc.nrow: %i\n", nrow(desired.completes)))
-    smean<-pollutantmean(directory=directory, "sulfate", id=desired.completes$id)
-    return(smean)
+    correlates <- vector(mode="numeric", length=nrow(selects))
+    for(i in 1:nrow(selects)){
+        cat(sprintf("id: %i\n",selects[i,"id"]))
+        file <- paste(getwd(),"/",directory,"/",sprintf("%03.f",
+                as.numeric(selects$id[i])),".csv", sep="")
+        cat(sprintf("%s\n",file) )
+        this<-(read.csv(file))
+        that<-subset(this,complete.cases(this)==T) # filter the NAs
+        correlates[i]<-cor(that$sulfate,that$nitrate)
+    }
+    #smean<-pollutantmean(directory=directory, pollutant="sulfate", id=desired.completes$id)
+    #nmean<-pollutantmean(directory=directory, pollutant="nitrate", id=desired.completes$id)
+    #cor(smean,nmean)
+    return(correlates)
 }
