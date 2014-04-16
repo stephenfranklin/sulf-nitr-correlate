@@ -23,20 +23,18 @@
 #           ## Return the mean of the pollutant across all monitors list
 #           ## in the 'id' vector (ignoring NA values)
 #   }
+#rm(list = ls())            # clear the workspace
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
     setwd(paste("./",directory, sep=""))
     filenames <- paste(sprintf("%03.f", as.numeric(id)),".csv", sep="")
-    X <- read.csv(filenames[1])  # make an empty vector
-    for(i in filenames[-1]){
-        cat(i)
-        # = paste(directory,"/",sprintf("%03.f", as.numeric(i)),".csv", sep="")
+    X <- read.csv(filenames[1])  # first file into df
+    for(i in filenames[-1]){    # combine it with the rest
+        #cat(i)
         Y<-read.csv(i)
-        #X<-rbind(X,Y[,pollutant])
         X<-rbind(X,Y)
-    # now we have a vector containing the values of
-    # the chosen pollutant in all the specfied files.
     }
     themean<-round(mean(X[,pollutant],na.rm=T),3)
-    return(x)
+    setwd("..")     # return to original wd
+    return(themean)
 }
