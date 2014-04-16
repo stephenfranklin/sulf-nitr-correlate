@@ -22,9 +22,7 @@
 #     ## number of complete cases
 # }
 # ```
-rm(list = ls())            # clear the workspace
-
-
+#rm(list = ls())            # clear the workspace
 complete <- function(directory, id = 1:332) {
     nobs <- vector(mode="numeric", length=length(id))
     for(i in 1:length(id)){
@@ -40,3 +38,5 @@ complete <- function(directory, id = 1:332) {
     #cat(sprintf("id: %i\n",id))
     return(completes)
 }
+#source("http://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R")
+#submit()
