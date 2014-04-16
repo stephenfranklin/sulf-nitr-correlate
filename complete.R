@@ -24,12 +24,13 @@
 # ```
 
 complete <- function(directory, id = 1:332) {
-    nobs = vector(mode="numeric", length=length(id))
+    nobs <- vector(mode="numeric", length=length(id))
+    cc <- nobs
     for(i in id){
-        file <- paste(getwd(),"/",directory,"/",sprintf("%03.f", as.numeric(id)),".csv", sep="")
-        cc<-sum(complete.cases(read.csv(file)))
+        file <- paste(getwd(),"/",directory,"/",sprintf("%03.f",
+                as.numeric(i)),".csv", sep="")
+        cc[i]<-sum(complete.cases(read.csv(file)))
     } 
-
-
-return()
+    completes<-data.frame(id, nobs)
+    return(completes)
 }
